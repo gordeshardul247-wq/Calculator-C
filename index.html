@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Calculator</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    input, select, button { font-size: 18px; padding: 8px; margin: 5px; }
+    #result { font-size: 24px; margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>Simple Calculator</h2>
+
+  <!-- Two number boxes and one dropdown for the operation -->
+  <input type="number" id="num1" placeholder="First number">
+
+  <select id="operation">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">×</option>
+    <option value="/">÷</option>
+  </select>
+
+  <input type="number" id="num2" placeholder="Second number">
+
+  <br>
+  <button onclick="calculate()">Calculate</button>
+
+  <!-- The answer will be shown here -->
+  <div id="result"></div>
+
+  <script>
+    function calculate() {
+      // 1. Read the values from the boxes
+      var a = parseFloat(document.getElementById("num1").value);
+      var b = parseFloat(document.getElementById("num2").value);
+      var op = document.getElementById("operation").value;
+      var answer;
+
+      // 2. Check that both boxes have numbers
+      if (isNaN(a) || isNaN(b)) {
+        document.getElementById("result").innerText = "Please enter both numbers";
+        return;
+      }
+
+      // 3. Do the math
+      if (op === "+") answer = a + b;
+      else if (op === "-") answer = a - b;
+      else if (op === "*") answer = a * b;
+      else if (op === "/") {
+        if (b === 0) {
+          document.getElementById("result").innerText = "Cannot divide by zero";
+          return;
+        }
+        answer = a / b;
+      }
+
+      // 4. Show the answer
+      document.getElementById("result").innerText = "Result: " + answer;
+    }
+  </script>
+
+</body>
+</html>
